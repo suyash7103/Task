@@ -1,0 +1,24 @@
+name: task_management_app
+description: "A new Flutter project."
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  firebase_core: ^2.12.0
+  firebase_auth: ^4.2.0
+  cloud_firestore: ^4.9.1
+  provider: ^6.1.2
+  google_sign_in: ^6.1.5
+  intl: ^0.18.0
+  uuid: ^3.0.7
+
+
+flutter:
+  uses-material-design: true
