@@ -34,23 +34,23 @@ class _AuthScreenState extends State<AuthScreen> {
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
-        
+
         await _firestore.collection('users').doc(authResult.user!.uid).set({
           'email': _emailController.text.trim(),
           'createdAt': Timestamp.now(),
         });
       }
     } catch (error) {
-      String message = 'An error occurred';
-      if (error is FirebaseAuthException) {
-        message = error.message ?? message;
-      }
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(message),
-          backgroundColor: Colors.red,
-        ),
-      );
+      // String message = 'An error occurred';
+      // if (error is FirebaseAuthException) {
+      //   message = error.message ?? message;
+      // }
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     content: Text(message),
+      //     backgroundColor: Colors.red,
+      //   ),
+      // );
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -64,7 +64,7 @@ class _AuthScreenState extends State<AuthScreen> {
         if (snapshot.hasData) {
           return TaskListScreen();
         }
-        
+
         return Scaffold(
           body: SafeArea(
             child: Center(
@@ -109,11 +109,12 @@ class _AuthScreenState extends State<AuthScreen> {
                               prefixIcon: const Icon(Icons.lock_outline),
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                  _obscurePassword 
-                                    ? Icons.visibility_outlined
-                                    : Icons.visibility_off_outlined,
+                                  _obscurePassword
+                                      ? Icons.visibility_outlined
+                                      : Icons.visibility_off_outlined,
                                 ),
-                                onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                                onPressed: () => setState(
+                                    () => _obscurePassword = !_obscurePassword),
                               ),
                             ),
                             obscureText: _obscurePassword,
@@ -136,11 +137,12 @@ class _AuthScreenState extends State<AuthScreen> {
                               child: Text(_isLogin ? 'Login' : 'Sign Up'),
                             ),
                           TextButton(
-                            onPressed: () => setState(() => _isLogin = !_isLogin),
+                            onPressed: () =>
+                                setState(() => _isLogin = !_isLogin),
                             child: Text(
                               _isLogin
-                                ? 'Create an Account'
-                                : 'Already have an Account?',
+                                  ? 'Create an Account'
+                                  : 'Already have an Account?',
                             ),
                           ),
                         ],
